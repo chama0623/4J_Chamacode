@@ -28,7 +28,11 @@ function checkStatus(){
                 s=s+"<tr>";
                 for(i=1;i<=l;i++){
                     s=s+"<tr>";
-                    s=s+"<td>"+a[i].title+"</td>";
+                    if(a[i].title.length>20){
+                        s=s+"<td>"+a[i].title.substr(0,20)+"...</td>";
+                    }else{
+                        s=s+"<td>"+a[i].title+"</td>";
+                    }
                     s=s+"<td>"+a[i].username+"</td>";
                     s=s+"<td>"+a[i].date+"</td>";
                     s=s+"<td>"+a[i].good+"</td>";

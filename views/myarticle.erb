@@ -13,7 +13,7 @@ New Article
 </div>
 
 <a class="btn btn-link" data-toggle="collapse" href="/contentspage" role="button" aria-expanded="false" aria-controls="collapseExample">
-Content
+Contents
 </a>
 <br>
 
@@ -24,14 +24,18 @@ Content
 <tr>
 <th>title</th>
 <th>公開状況</th>
-<th>更新日時lp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </th>
+<th>更新日時</th>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
 <th>いいね数</th>
 <th> </th>
 <th> </th>
 </tr>
 <% @s.each do |a| %>
 <tr>
+<% if a.title.size>20 %>
+<td><%= a.title[0,20]+"..." %></td>
+<% else %>
 <td><%= a.title %></td>
+<% end %>
 <td>
 <% if a.open==1 then%>
 公開
@@ -60,7 +64,9 @@ Content
 <% end %>
 </table>
 <% else %>
+<div class="row mx-2">
 you have no article.
+</div>
 <% end %>
 
 <br>

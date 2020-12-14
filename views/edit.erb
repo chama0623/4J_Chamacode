@@ -14,21 +14,21 @@
 </div>
 <div class="form-group">
     <label for="exampleFormControlInput1">Title</label>
-    <input type="text" class="form-control" name="title" value="<%= @a.title %>">
+    <input type="text" class="form-control" name="title" maxlength="60" value="<%= @a.title %>">
   </div>
 <br>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Description</label>
-    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="15"><%= @a.description %></textarea>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.description %></textarea>
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Code</label>
-    <textarea class="form-control" name="code" id="exampleFormControlTextarea1" rows="15"><%= @a.code %></textarea>
+    <textarea class="form-control" name="code" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.code %></textarea>
   </div>
     <div class="form-group">
     <label for="exampleFormControlTextarea1">Result</label>
-    <textarea class="form-control" name="result" id="exampleFormControlTextarea1" rows="15"><%= @a.result %></textarea>
+    <textarea class="form-control" name="result" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.result %></textarea>
   </div>
 <button type="submit" class="btn btn-primary">Submit</button>
 <input type="hidden" name="id" value="<%= @a.id %>">

@@ -24,6 +24,7 @@ username_max = 40
 passward_max = 40
 # titleの最大長
 title_max = 60
+# 記事の最大長
 article_max = 1000
 
 # パスワードを確認する関数
