@@ -17,9 +17,14 @@ end
 class Content < ActiveRecord::Base
 end
 
+# 名前の最大長
 username_max = 40
+# パスワードの最大長
 passward_max = 40
 
+# パスワードを確認する関数
+# 入力とDBが一致 -> true
+# 不一致 -> false
 def checkpass(trial_username,trial_passwd)
   # Search recorded info
   begin
@@ -49,6 +54,9 @@ def checkpass(trial_username,trial_passwd)
   end
 end
 
+# 入力文字列が1文字以上,最大長以下であることを確認する関数
+# 1 <= inputstr < maxlen : true
+# else : false
 def checkstr(inputstr,maxlen)
     if inputstr.size==0 then
       return false
@@ -59,14 +67,19 @@ def checkstr(inputstr,maxlen)
     end
   end
 
+# loginにリダイレクト 
 get '/' do
   redirect '/login'
 end
 
+# ログインフォームを表示
 get '/login' do
   erb :loginscr
 end
 
+# ログイン管理
+# 成功 : contentspageにリダイレクト
+# 失敗 : failureにリダイレクト
 post '/auth' do
   username = params[:uname]
   pass = params[:pass]
@@ -81,10 +94,21 @@ post '/auth' do
   end
 end
 
+# ログイン失敗の表示
+get '/failure' do
+  erb :failure
+end
+
+# アカウント作成フォームを表示
 get '/createaccount' do
   erb :makeAccount
 end
 
+# アカウント作成管理
+# 成功 : successResister
+# 失敗1(usernameが既に存在) : failure1Registerにリダイレクト
+# 失敗2(pass1,pass2が不一致) : failure2Registerにリダイレクト
+# 失敗3(入力エラー) : failure3Registerにリダイレクト
 post '/newaccount' do
   checkflg=true
   if !checkstr(params[:uname],username_max) then
@@ -124,30 +148,35 @@ post '/newaccount' do
 end
 end
 
+# アカウント作成成功の表示
 get '/successResister' do
   erb :successResister
 end
 
+# usernameが既に存在しているエラーを表示
 get '/failure1Resister' do
   erb :failure1Resister
 end
 
+# pass1,pass2が不一致のエラーを表示
 get '/failure2Resister' do
   erb :failure2Resister
 end
 
+# 入力エラーの表示
 get '/failure3Resister' do
   erb :failure3Resister
 end
 
-get '/failure' do
-  erb :failure
-end
-
+# パスワードの再発行フォームを表示
 get '/forgetpass' do
   erb :forgetpass
 end
 
+# パスワードを再発行する処理
+# 成功 : successRenewpassにリダイレクト
+# 失敗(usernameが存在しない) : unknownUserにリダイレクト
+# 失敗(pass1,pass2が不一致) : failure2Resisterにリダイレクト
 post '/newpass' do
   username = params[:uname]
   pass1 = params[:pass1]
@@ -172,27 +201,31 @@ post '/newpass' do
   end
 end
 
+# パスワードの再発行成功を表示
 get '/successRenewpass' do
   erb :successRenewpass
 end 
 
+# usernameが見つからないことを表示
 get '/unknownUser' do
   erb :unknownUser
 end 
 
+# ログイン必須
+# コンテンツページを表示
+# 未ログイン時 : badrequestにリダイレクト
 get '/contentspage' do
   if (session[:login_flag]==true)
     @a = session[:username]
-    @c = Content.select('*').where('open == 1').count
-    if @c>=1 then
-      @s =  Content.select('*').where('open == 1')
-    end
     erb :contents
   else
     erb :badrequest
   end
 end
 
+# ログイン必須
+# ログインしているユーザーの記事だけを表示
+# 未ログイン時 : badrequestにリダイレクト
 get '/myarticle' do
   @isarticle=0
   if (session[:login_flag]==true)
@@ -211,6 +244,9 @@ get '/myarticle' do
   end
 end
 
+# ログイン必須
+# 記事の新規作成フォームを表示
+# 未ログイン時 : badrequestにリダイレクト
 get '/newarticle' do
   if (session[:login_flag]==true)
     erb :newarticle
@@ -219,6 +255,11 @@ get '/newarticle' do
   end
 end
 
+# ログイン必須
+# 記事の新規作成処理
+# 成功 : successarticleにリダイレクト
+# 失敗 : !
+# 未ログイン時 : badrequestにリダイレクト
 post '/autharticle' do
   if (session[:login_flag]==true)
     # サニタイジング処理を行う場所
@@ -247,6 +288,9 @@ post '/autharticle' do
   end
 end
 
+# ログイン必須
+# 記事の新規作成成功を表示
+# 未ログイン時 : badrequestにリダイレクト
 get '/successarticle' do
   if (session[:login_flag]==true)
     erb :successarticle
@@ -255,6 +299,9 @@ get '/successarticle' do
   end
 end
 
+# ログイン必須
+# 記事の削除処理をしてmyarticleにリダイレクト
+# 未ログイン時 : badrequestにリダイレクト
 delete '/del' do
   if (session[:login_flag]==true)
     s=Content.find(params[:id])
@@ -265,6 +312,9 @@ delete '/del' do
   end
 end
 
+# ログイン必須
+# 記事の詳細を表示
+# 未ログイン時 : badrequestにリダイレクト
 post '/detail' do
   if (session[:login_flag]==true)
     @cookieu = session[:username]
@@ -281,6 +331,9 @@ post '/detail' do
   end
 end
 
+# ログイン必須
+# いいねが押されたときの処理をしてcontenspageにリダイレクト
+# 未ログイン時 : badrequestにリダイレクト
 post '/good' do
   if (session[:login_flag]==true)
     a = Content.find(params[:id])
@@ -292,6 +345,9 @@ post '/good' do
   end
 end
 
+# ログイン必須
+# 記事の編集画面を表示
+# 未ログイン時 : badrequestにリダイレクト
 post '/edit' do
   if (session[:login_flag]==true)
     @a = Content.find(params[:id])
@@ -301,6 +357,11 @@ post '/edit' do
   end
 end
 
+# ログイン必須
+# 記事の更新処理
+# 成功 : successarticleにリダイレクト
+# 失敗 : !
+# 未ログイン時 : badrequestにリダイレクト
 post '/authedit' do
   if (session[:login_flag]==true)
     a = Content.find(params[:id])
@@ -322,18 +383,19 @@ post '/authedit' do
   end
 end
 
+# ログアウトの処理
 get '/logout' do
   session.clear
   erb :logout
 end
 
+# ログイン必須
+# contentsページにおける記事の検索処理
+# 未ログイン時 : badrequestにリダイレクト
 get '/search/:val' do
+  if (session[:login_flag]==true)
   key=params[:val]
-  if key.size==0 then
-    s=Content.select('*').where('open == 1')
-  else
-    s=Content.where("open==1 AND title LIKE ?","%#{key}%")
-  end
+  s=Content.where("open==1 AND title LIKE ?","%#{key}%")
   puts s
   l=s.length
   r=[]
@@ -352,7 +414,7 @@ get '/search/:val' do
       end
   else
       d={
-          id: "#{a.id}",
+          id: "none",
           title:"none",
           username:"none",
           date:"none",
@@ -362,4 +424,7 @@ get '/search/:val' do
   end
 
   r.to_json
+else
+  erb :badrequest
+end
 end

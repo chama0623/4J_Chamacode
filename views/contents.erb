@@ -14,34 +14,6 @@ My Article
     検索 <input type="text" id="searchform" onKeyUp="doSearch();" maxlength=40>
     </form>
     <div id="kekka"></div>
-<% if @c>=1 then %>
-
-<table class="table table-bordered">
-<tr>
-<th>title</th>
-<th>username</th>
-<th>更新日時</th>
-<th>いいね数</th>
-<th> </th>
-</tr>
-<% @s.each do |a| %>
-<tr>
-<td><%= a.title %></td>
-<td><%= a.username %></td>
-<td><%= a.date %></td> 
-<td><%= a.good %></td> 
-
-<form method="post" action="detail">
-<td><input type="submit" value="Detail">
-<input type="hidden" name="id" value="<%= a.id %>">
-</td>
-</form>
-</tr>
-<% end %>
-</table>
-<% else %>
-No article.
-<% end %>
 
 <br>
 <a class="btn btn-link" data-toggle="collapse" href="/logout" role="button" aria-expanded="false" aria-controls="collapseExample">
