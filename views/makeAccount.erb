@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<div class="row mx-2">
+Enter your new username and password.<br>
+</div>
+
+<div class="mx-auto" style="width: 300px;">
+<form action="/newaccount" method="post">
+<div class="form-group">
+    <label for="exampleFormControlInput1">Username</label>
+    <input type="text" class="form-control" name="uname" placeholder="user">
+  </div>
+<div class="form-group">
+    <label for="exampleFormControlInput1">Password</label>
+    <input type="password" class="form-control" name="pass1" >
+  </div>
+<div class="form-group">
+    <label for="exampleFormControlInput1">Password Again</label>
+    <input type="password" class="form-control" name="pass2" >
+  </div>
+  <br>
+
+<button type="submit" class="btn btn-primary">Create</button>
+<button type="reset" class="btn btn-danger">Reset</button>
+</form>
+<a class="btn btn-link" data-toggle="collapse" href="/login" role="button" aria-expanded="false" aria-controls="collapseExample">
+Login
+</a>
+<br>
+<a class="btn btn-link" data-toggle="collapse" href="/forgetpass" role="button" aria-expanded="false" aria-controls="collapseExample">
+Forget Password
+</a>
+</div>

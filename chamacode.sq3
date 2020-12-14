@@ -1,0 +1,18 @@
+create table users (
+username char(40) primary key,
+salt varchar(40),
+hashed varchar(40),
+algo char(5)
+);
+
+create table contents (
+id char(40) primary key,
+username char(40),
+date char(19),
+title char(60),
+description char(1000),
+code char(1000),
+result char(1000),
+open int,
+good int
+);

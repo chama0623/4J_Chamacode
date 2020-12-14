@@ -1,0 +1,45 @@
+<div class="row mx-2">
+<h2> <%= @a.title %> @<%= @a.username %> </h2>
+</div>
+
+<div class="row mx-2">
+更新日 :  <%= @a.date %> <br>
+いいね数 : <%= @a.good %>
+</div>
+
+<br>
+
+<div class="row mx-2">
+<h4>description</h4>
+</div>
+
+<div class="row mx-4">
+<%= @a.description %> <br>
+</div>
+
+<div class="row mx-2">
+<h4>code</h4>
+</div>
+
+<div class="row mx-4">
+<%= @a.code %> 
+</div>
+
+<div class="row mx-2">
+<h4>result</h4>
+</div>
+
+<div class="row mx-4">
+<%= @a.result %> 
+</div>
+
+<br>
+
+<% if !@user_flg then %>
+<div class="row mx-2">
+<form method="post" action="good">
+<button type="submit" class="btn btn-primary">good</button>
+<input type="hidden" name="id" value="<%= @a.id %>">
+</form>
+</div>
+<% end %>

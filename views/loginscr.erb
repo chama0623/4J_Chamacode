@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<div class="row mx-2">
+Enter your username and password.<br>
+</div>
+
+<div class="mx-auto" style="width: 300px;">
+<form action="/auth" method="post">
+<div class="form-group">
+    <label for="exampleFormControlInput1">Username</label>
+    <input type="text" class="form-control" name="uname" placeholder="user">
+  </div>
+<div class="form-group">
+    <label for="exampleFormControlInput1">Password</label>
+    <input type="password" class="form-control" name="pass" >
+  </div><br>
+<br>
+<button type="submit" class="btn btn-primary">Login</button>
+<button type="reset" class="btn btn-danger">Reset</button>
+</form>
+<br>
+<a class="btn btn-link" data-toggle="collapse" href="/createaccount" role="button" aria-expanded="false" aria-controls="collapseExample">
+Create Account
+</a>
+<br>
+<a class="btn btn-link" data-toggle="collapse" href="/forgetpass" role="button" aria-expanded="false" aria-controls="collapseExample">
+Forget Password
+</a>
+</div>

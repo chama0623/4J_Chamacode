@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<span class="row mx-2">
+<h3>This is the article form.</h3>
+</span>
+
+<div class="ml-2" style="width: 1200px;">
+<form action="/authedit" method="post">
+<div class="form-check">
+  <input class="form-check-input" name="publicbutton[]" value="checked" type="checkbox" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">
+    Public
+  </label>
+</div>
+<div class="form-group">
+    <label for="exampleFormControlInput1">Title</label>
+    <input type="text" class="form-control" name="title" value="<%= @a.title %>">
+  </div>
+<br>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Description</label>
+    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="15"><%= @a.description %></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Code</label>
+    <textarea class="form-control" name="code" id="exampleFormControlTextarea1" rows="15"><%= @a.code %></textarea>
+  </div>
+    <div class="form-group">
+    <label for="exampleFormControlTextarea1">Result</label>
+    <textarea class="form-control" name="result" id="exampleFormControlTextarea1" rows="15"><%= @a.result %></textarea>
+  </div>
+<button type="submit" class="btn btn-primary">Submit</button>
+<input type="hidden" name="id" value="<%= @a.id %>">
+</form>
+</div>
+
