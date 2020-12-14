@@ -2,6 +2,7 @@ require 'sinatra'
 require 'digest/md5'
 require 'active_record'
 require 'json'
+require 'cgi/escape'
 
 ActiveRecord::Base.configurations = YAML.load_file('database.yml')
 ActiveRecord::Base.establish_connection :development
@@ -21,6 +22,9 @@ end
 username_max = 40
 # パスワードの最大長
 passward_max = 40
+# titleの最大長
+title_max = 60
+article_max = 1000
 
 # パスワードを確認する関数
 # 入力とDBが一致 -> true
@@ -81,9 +85,18 @@ end
 # 成功 : contentspageにリダイレクト
 # 失敗 : failureにリダイレクト
 post '/auth' do
-  username = params[:uname]
-  pass = params[:pass]
-
+  checkflg=true
+  username =CGI.escapeHTML(params[:uname])
+  pass = CGI.escapeHTML(params[:pass])
+  if !checkstr(username,username_max) then
+    checkflg=false
+  elsif !checkstr(pass,passward_max) then
+    checkflg=false
+  end
+  
+  if checkflg==false then
+    redirect '/failure3Resister'
+  else 
   if(checkpass(username,pass))
     session[:login_flag] = true
     session[:username] = username
@@ -92,6 +105,7 @@ post '/auth' do
     session[:login_flag] = false
     redirect '/failure'
   end
+end
 end
 
 # ログイン失敗の表示
@@ -111,20 +125,21 @@ end
 # 失敗3(入力エラー) : failure3Registerにリダイレクト
 post '/newaccount' do
   checkflg=true
-  if !checkstr(params[:uname],username_max) then
+  username = CGI.escapeHTML(params[:uname])
+  pass1 = CGI.escapeHTML(params[:pass1])
+  pass2 = CGI.escapeHTML(params[:pass2])
+  if !checkstr(username,username_max) then
     checkflg=false
-  elsif !checkstr(params[:pass1],passward_max) then
+  elsif !checkstr(pass1,passward_max) then
     checkflg=false
-  elsif !checkstr(params[:pass2],passward_max) then
+  elsif !checkstr(pass2,passward_max) then
     checkflg=false
   end
   
   if checkflg==false then
     redirect '/failure3Resister'
   else 
-  username = params[:uname]
-  pass1 = params[:pass1]
-  pass2 = params[:pass2]
+
   begin
     a = User.find(username)
     redirect '/failure1Resister'
@@ -178,9 +193,21 @@ end
 # 失敗(usernameが存在しない) : unknownUserにリダイレクト
 # 失敗(pass1,pass2が不一致) : failure2Resisterにリダイレクト
 post '/newpass' do
-  username = params[:uname]
-  pass1 = params[:pass1]
-  pass2 = params[:pass2]
+  checkflg=true
+  username = CGI.escapeHTML(params[:uname])
+  pass1 = CGI.escapeHTML(params[:pass1])
+  pass2 = CGI.escapeHTML(params[:pass2])
+  if !checkstr(username,username_max) then
+    checkflg=false
+  elsif !checkstr(pass1,passward_max) then
+    checkflg=false
+  elsif !checkstr(pass2,passward_max) then
+    checkflg=false
+  end
+  
+  if checkflg==false then
+    redirect '/failure3Resister'
+  else 
   begin
     a = User.find(username)
     if pass1==pass2 then
@@ -199,6 +226,7 @@ post '/newpass' do
   rescue => e
     redirect '/unknownUser'
   end
+end
 end
 
 # パスワードの再発行成功を表示
@@ -263,6 +291,25 @@ end
 post '/autharticle' do
   if (session[:login_flag]==true)
     # サニタイジング処理を行う場所
+    checkflg=true
+    title = CGI.escapeHTML(params[:title])
+    description = CGI.escapeHTML(params[:description])
+    code = CGI.escapeHTML(params[:code])
+    result = CGI.escapeHTML(params[:result])
+    if !checkstr(title,title_max) then
+      checkflg=false
+    elsif !checkstr(description,article_max) then
+      checkflg=false
+    elsif !checkstr(code,article_max) then
+      checkflg=false
+    elsif !checkstr(result,article_max) then
+      checkflg=false
+    end
+    
+    if checkflg==false then
+      redirect '/failure3Resister'
+    else 
+
     authtime = Time.now.strftime("%Y/%m/%d %T")
     @a = session[:username]
     r = Random.new
@@ -270,10 +317,10 @@ post '/autharticle' do
     s.id = Digest::MD5.hexdigest(r.bytes(40))
     s.username = @a
     s.date = authtime
-    s.title = params[:title]
-    s.description = params[:description]
-    s.code = params[:code]
-    s.result = params[:result]
+    s.title = title
+    s.description = description
+    s.code = code
+    s.result = result
     s.good=0
 
     if params[:publicbutton] then
@@ -283,6 +330,7 @@ post '/autharticle' do
     end
     s.save
     redirect '/successarticle'
+  end
   else
     erb :badrequest
   end
@@ -364,13 +412,31 @@ end
 # 未ログイン時 : badrequestにリダイレクト
 post '/authedit' do
   if (session[:login_flag]==true)
+    checkflg=true
+    title = CGI.escapeHTML(params[:title])
+    description = CGI.escapeHTML(params[:description])
+    code = CGI.escapeHTML(params[:code])
+    result = CGI.escapeHTML(params[:result])
+    if !checkstr(title,title_max) then
+      checkflg=false
+    elsif !checkstr(description,article_max) then
+      checkflg=false
+    elsif !checkstr(code,article_max) then
+      checkflg=false
+    elsif !checkstr(result,article_max) then
+      checkflg=false
+    end
+    
+    if checkflg==false then
+      redirect '/failure3Resister'
+    else 
     a = Content.find(params[:id])
     authtime = Time.now.strftime("%Y/%m/%d %T")
     a.date = authtime
-    a.title = params[:title]
-    a.description = params[:description]
-    a.code = params[:code]
-    a.result = params[:result]
+    a.title = title
+    a.description = description
+    a.code = code
+    a.result = result
     if params[:publicbutton] then
       a.open=1
     else
@@ -378,6 +444,7 @@ post '/authedit' do
     end
     a.save
     redirect '/successarticle'
+  end
   else
     erb :badrequest
   end
