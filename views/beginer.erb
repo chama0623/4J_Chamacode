@@ -1,0 +1,56 @@
+<center>
+<h1>Chama codeの使い方</h1>
+</center>
+
+<a class="btn btn-link" data-toggle="collapse" href="/contentspage" role="button" aria-expanded="false" aria-controls="collapseExample">
+Contents
+</a>
+
+<div class="mx-2">
+<h2>初めまして,<font color="#32cd32"><%= @a %> </font>さん!</h2>
+
+このページでは,Chama codeの概要と使い方解説します! 
+<br>
+<hr>
+<h3>目次</h3> 
+1. <a href="#check1">そもそもChama codeって何?</a><br>
+2. <a href="#check2">記事を投稿しよう!</a><br>
+3. <a href="#check3">記事を検索しよう!</a><br>
+4. <a href="#check4">ランキングを見よう!</a><br>
+<br>
+<hr>
+<h3 id="check1">そもそもChama codeって何?</h3>
+Chama codeは4JネットワークプログラミングIの課題で作成したWebアプリです.
+作成者は金澤雄大です.このアプリはユーザーのソースコードを共有することを目的に作られています.
+公開したソースコードは他のユーザーが「いいね」をつけることができます.「いいね」が多い投稿はランキングの上位に表示されます.記事のランクインを目指しましょう!
+<br>
+<hr>
+<h3 id="check2">記事を投稿しよう!</h3>
+まずは,<font color="#32cd32"><%= @a %> </font>さんの記事を投稿しましょう.
+記事の投稿は次の手順で行うことできます.<br>
+1. <a href="/myarticle">MyArticle</a>の「New Article」から投稿フォームを開きます.<br>
+2. 投稿内容(タイトル,説明,ソースコード,実行結果)を書きます.タイトルは60文字,説明,ソースコード,
+実行結果は100文字まで入力できます.ただし,HTMLやJavaScriptのタグは反映されません.また,記事は公開/非公開の
+2つの状態があり,「公開」のボタンにチェックをいれると全てのユーザーが閲覧できるようになります.
+ボタンにチェックを入れない場合は投稿者本人のみがその記事を閲覧できます.<br>
+<img src="image1.png"><br>
+3. 投稿フォームの一番下にある「Submit」をクリックして投稿しましょう.<br>
+4. 投稿した記事は<a href="/myarticle">MyArticle</a>に表示されます.投稿内容を表示したいときは,
+「詳細」をクリックしましょう.投稿内容を編集したいときは「編集」をクリックしましょう.投稿内容を削除
+したいときは「削除」をクリックしましょう.<br>
+<br>
+<hr>
+<h3 id="check3">記事を検索しよう!</h3>
+ユーザーが公開している記事は誰でも見ることができます.公開されている記事を検索してみましょう.
+検索は<a href="/contentspage">Contents</a>のフォームから行えます.読みたい記事にマッチしそうな
+単語を入力しましょう.検索は入力した単語と記事のタイトルで行っています.記事の内容で検索はできません.<br>
+他のユーザーの記事は,記事の詳細の一番下に「いいね」ボタンがあります.素晴らしい記事には「いいね」を押しましょう!<br>
+<br>
+<hr>
+<h3 id="check4">ランキングを見よう!</h3>
+公開されている「いいね」が多い記事のランキング見ることができます.ランキングは<a href="/ranking">こちら</a>
+</div>
+
+<a class="btn btn-link" data-toggle="collapse" href="/logout" role="button" aria-expanded="false" aria-controls="collapseExample">
+Logout
+</a>

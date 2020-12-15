@@ -1,39 +1,26 @@
-<div class="row mx-2">
 <h2> <%= @a.title %> @<font color="#32cd32"><%= @a.username %></font> </h2>
-</div>
 
-<div class="row mx-2">
 更新日 :  <%= @a.date %> <br>
 いいね数 : <%= @a.good %>
-</div>
 
 <br>
-
-<div class="row mx-2">
-<h4>description</h4>
-</div>
-
-<div class="row mx-4" style="white-space:pre-wrap;">
+<div style="white-space:pre-wrap;">
 <%= @a.description %>
 </div>
 
 <br>
 
-<div class="row mx-2">
-<h4>code</h4>
-</div>
+<h4>ソースコード</h4>
 
-<span class="row mx-4" style="white-space:pre-wrap; padding: 5px; margin-bottom: 5px; border: 1px solid #333333; border-radius: 10px;" >
+<div class="row mx-4" style="white-space:pre-wrap; padding: 5px; margin-bottom: 5px; border: 1px solid #333333; border-radius: 10px;" >
 <pre><code>
 <%= @a.code %> 
 </code></pre>
-</span>
+</div>
 
 <br>
 
-<div class="row mx-2">
-<h4>result</h4>
-</div>
+<h4>実行結果</h4>
 
 <div class="row mx-4" style="white-space:pre-wrap; padding: 5px; margin-bottom: 5px; border: 1px solid #333333; border-radius: 10px;" >
 <pre><code>

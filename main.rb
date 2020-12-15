@@ -253,6 +253,50 @@ get '/contentspage' do
 end
 
 # ログイン必須
+# いいね数の多い記事を表示
+# 未ログイン時 : badrequestにリダイレクト
+get '/ranking' do
+  @isarticle=0
+  if (session[:login_flag]==true)
+    @a = session[:username]
+    # userの記事の件数を取得
+    @c = Content.select('*').count
+
+    if @c>=1 then # 記事があるとき読み込み
+      @s = Content.where("open==1 AND good>0").order('good desc')
+      @isarticle=1
+    end
+
+    erb :ranking
+  else
+    erb :badrequest
+  end
+end
+
+# ログイン必須
+# いいね数の多い記事を表示
+# 未ログイン時 : badrequestにリダイレクト
+get '/beginer' do
+  if (session[:login_flag]==true)
+    @a = session[:username]
+    erb :beginer
+  else
+    erb :badrequest
+  end
+end
+
+# ログイン必須
+# 記事の新規作成フォームを表示
+# 未ログイン時 : badrequestにリダイレクト
+get '/newarticle' do
+  if (session[:login_flag]==true)
+    erb :newarticle
+  else
+    erb :badrequest
+  end
+end
+
+# ログイン必須
 # ログインしているユーザーの記事だけを表示
 # 未ログイン時 : badrequestにリダイレクト
 get '/myarticle' do

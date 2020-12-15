@@ -1,31 +1,29 @@
-<span class="row mx-2">
-<h3>This is the article form.</h3>
-</span>
+<h3>記事を更新します!</h3>
 
 <div class="ml-2" style="width: 1200px;">
 <form action="/authedit" method="post">
 <div class="form-check">
   <input class="form-check-input" name="publicbutton[]" value="checked" type="checkbox" id="defaultCheck1">
   <label class="form-check-label" for="defaultCheck1">
-    Public
+    公開
   </label>
 </div>
 <div class="form-group">
     <label for="exampleFormControlInput1">Title</label>
-    <input type="text" class="form-control" name="title" maxlength="60" value="<%= @a.title %>">
+    <input type="text" class="form-control" name="タイトル" maxlength="60" value="<%= @a.title %>">
   </div>
 <br>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Description</label>
+    <label for="exampleFormControlTextarea1">記事の内容</label>
     <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.description %></textarea>
   </div>
 
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Code</label>
+    <label for="exampleFormControlTextarea1">ソースコード</label>
     <textarea class="form-control" name="code" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.code %></textarea>
   </div>
     <div class="form-group">
-    <label for="exampleFormControlTextarea1">Result</label>
+    <label for="exampleFormControlTextarea1">実行結果</label>
     <textarea class="form-control" name="result" id="exampleFormControlTextarea1" rows="15" maxlength="1000"><%= @a.result %></textarea>
   </div>
 <button type="submit" class="btn btn-primary">Submit</button>

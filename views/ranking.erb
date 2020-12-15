@@ -1,70 +1,48 @@
 <script src="deleteCheck.js"></script>
-<center>
-<h1>MyArticle</h1>
-</center>
-<span class="row mx-2">
-<h2><font color="#32cd32"><%= @a %> </font>さんの記事一覧です</h2>
-</span>
 
-<div class="text-right mr-5" >
-<a class="btn btn-success" data-toggle="collapse" href="/newarticle" role="button" aria-expanded="false" aria-controls="collapseExample">
-New Article
-</a>
-</div>
+<center>
+<h1>ランキング</h1>
+</center>
 
 <a class="btn btn-link" data-toggle="collapse" href="/contentspage" role="button" aria-expanded="false" aria-controls="collapseExample">
 Contents
 </a>
-<br>
 
 <br>
 <% if @isarticle>=1 then %>
 
 <table class="table table-bordered">
 <tr>
+<th>順位</th>
 <th>タイトル</th>
-<th>公開状況</th>
+<th>投稿者</th>
 <th>更新日時</th>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
 <th>いいね数</th>
 
+<% rank=1 %>
 </tr>
 <% @s.each do |a| %>
 <tr>
+<td><%= rank %></td>
+<% rank+=1 %>
 <% if a.title.size>20 %>
 <td><%= a.title[0,20]+"..." %></td>
 <% else %>
 <td><%= a.title %></td>
 <% end %>
-<td>
-<% if a.open==1 then%>
-公開
-<% else %>
-非公開
-<%end%>
-</td>
+<td><%= a.username %></td>
 <td><%= a.date %></td>
 <td><%= a.good %></td> 
 <form method="post" action="detail">
 <td><button type="submit" class="btn btn-primary">詳細</button></td>
 <input type="hidden" name="id" value="<%= a.id %>">
 </form>
-
-<form method="post" action="edit">
-<td><button type="submit" class="btn btn-success">編集</button></td>
-<input type="hidden" name="id" value="<%= a.id %>">
-</form>
-
-<form method="post" action="del">
-<td><button type="submit" class="btn btn-danger" onclick="return deleteCheck();">削除</button></td>
-<input type="hidden" name="id" value="<%= a.id %>">
-<input type="hidden" name="_method" value="delete">
-</form>
 </tr>
 <% end %>
 </table>
 <% else %>
 <div class="row mx-2">
-you have no article.
+No article.
 </div>
 <% end %>
 

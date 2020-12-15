@@ -1,18 +1,22 @@
 <script type="text/javascript" src="search.js"></script>
-<div class="row mx-2">
 <h2>Welcome <font color="#32cd32"><%= @a %> </font> !</h2>
-</div>
 
 <a class="btn btn-link" data-toggle="collapse" href="/myarticle" role="button" aria-expanded="false" aria-controls="collapseExample">
 MyArticle
 </a>
+
+<a class="btn btn-link" data-toggle="collapse" href="/ranking" role="button" aria-expanded="false" aria-controls="collapseExample">
+ランキング
+</a>
+
+<a class="btn btn-link" data-toggle="collapse" href="/beginer" role="button" aria-expanded="false" aria-controls="collapseExample">
+初めての方へ
+</a>
 <br>
 
-<div class="row mx-2">
 <form>
     タイトル名 : <input type="text" id="searchform" onKeyUp="doSearch();" placeholder="find article..." maxlength=40>
     </form>
-</div>
 <div id="kekka"></div>
 
 <br>
