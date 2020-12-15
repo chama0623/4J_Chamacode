@@ -4,7 +4,7 @@ function doSearch(){
     t = document.getElementById("searchform").value;
     if(t.length!=0){
         xhr.onreadystatechange = checkStatus;
-        xhr.open('GET','http://127.0.0.1:9998/search/'+t,true);
+        xhr.open('GET','http://'+window.location.hostname+':9998/search/'+t,true);
         xhr.responseType = 'json';
         xhr.send(null);
     }
