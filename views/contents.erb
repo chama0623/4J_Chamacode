@@ -1,19 +1,19 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <script type="text/javascript" src="search.js"></script>
 <div class="row mx-2">
-<h2>Welcome <font color="#7cfc00"><%= @a %> </font> !</h2>
+<h2>Welcome <font color="#32cd32"><%= @a %> </font> !</h2>
 </div>
 
 <a class="btn btn-link" data-toggle="collapse" href="/myarticle" role="button" aria-expanded="false" aria-controls="collapseExample">
-My Article
+MyArticle
 </a>
 <br>
 
-
+<div class="row mx-2">
 <form>
-    記事の検索 <input type="text" id="searchform" onKeyUp="doSearch();" maxlength=40>
+    タイトル名 : <input type="text" id="searchform" onKeyUp="doSearch();" placeholder="find article..." maxlength=40>
     </form>
-    <div id="kekka"></div>
+</div>
+<div id="kekka"></div>
 
 <br>
 <a class="btn btn-link" data-toggle="collapse" href="/logout" role="button" aria-expanded="false" aria-controls="collapseExample">

@@ -1,9 +1,7 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
 <script src="deleteCheck.js"></script>
 
 <span class="row mx-2">
-<h2><font color="#7cfc00"><%= @a %> </font>'s article page.</h2>
+<h2><font color="#32cd32"><%= @a %> </font>さんの記事一覧です</h2>
 </span>
 
 <div class="text-right mr-5" >
@@ -22,12 +20,11 @@ Contents
 
 <table class="table table-bordered">
 <tr>
-<th>title</th>
+<th>タイトル</th>
 <th>公開状況</th>
 <th>更新日時</th>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </th>
 <th>いいね数</th>
-<th> </th>
-<th> </th>
+
 </tr>
 <% @s.each do |a| %>
 <tr>
@@ -46,17 +43,17 @@ Contents
 <td><%= a.date %></td>
 <td><%= a.good %></td> 
 <form method="post" action="detail">
-<td><input type="submit" value="Detail"></td>
+<td><button type="submit" class="btn btn-primary">詳細</button></td>
 <input type="hidden" name="id" value="<%= a.id %>">
 </form>
 
 <form method="post" action="edit">
-<td><input type="submit" value="Edit"></td>
+<td><button type="submit" class="btn btn-success">編集</button></td>
 <input type="hidden" name="id" value="<%= a.id %>">
 </form>
 
 <form method="post" action="del">
-<td><input type="submit" value="Delete" onclick="return deleteCheck();"></td>
+<td><button type="submit" class="btn btn-danger" onclick="return deleteCheck();">削除</button></td>
 <input type="hidden" name="id" value="<%= a.id %>">
 <input type="hidden" name="_method" value="delete">
 </form>
