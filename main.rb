@@ -458,6 +458,10 @@ end
 post '/authedit' do
   if (session[:login_flag]==true)
     checkflg=true
+    puts params[:title]
+    puts params[:description]
+    puts params[:code]
+    puts params[:result]
     title = CGI.escapeHTML(params[:title])
     description = CGI.escapeHTML(params[:description])
     code = CGI.escapeHTML(params[:code])
